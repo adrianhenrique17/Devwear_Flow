@@ -4,7 +4,7 @@ import "../../pages/Register/Register.css";
 import logo2 from "../../assets/devwearball.png";
 import { Link } from "react-router-dom";
 import api from "../../api/api";
-import InputMask from "react-input-mask"; // lib de Cpf mask
+import InputMask from "react-input-mask";
 
 interface FormErrors {
   name?: string;
@@ -27,11 +27,10 @@ const Register = () => {
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
-  //função valida cpf de vdd
   const validateCPF = (cpf: string): boolean => {
     const cleanedCPF = cpf.replace(/[^\d]/g, "");
-
     if (cleanedCPF.length !== 11) return false;
     if (/^(\d)\1{10}$/.test(cleanedCPF)) return false;
 
@@ -116,8 +115,7 @@ const Register = () => {
       });
 
       if (response.data && response.status === 201) {
-        window.alert("Registro bem-sucedido!");
-        console.log("Registro bem-sucedido!");
+        setSuccessMessage("Registro bem-sucedido!");
         setFormData({
           name: "",
           email: "",
@@ -125,7 +123,10 @@ const Register = () => {
           confirmPassword: "",
           cpf: "",
         });
-        navigate("/"); // Redireciona para a tela de login
+
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
       } else {
         setError(response.data.error || "Erro desconhecido no registro");
       }
@@ -149,11 +150,9 @@ const Register = () => {
           );
         } else {
           setError("Ocorreu um erro inesperado. Tente novamente.");
-          window.alert("Ocorreu um erro inesperado. Tente novamente.");
         }
       } else {
         setError("Erro desconhecido. Tente novamente.");
-        window.alert("Erro desconhecido. Tente novamente.");
       }
     }
   };
@@ -170,121 +169,111 @@ const Register = () => {
 
   return (
     <div className="login-page">
-      <div className="row-login">
-        <div className="d-flex justify-content-center align-items-center text-center">
-          {error && <div className="alert alert-danger">{error}</div>}
-          <form onSubmit={handleSubmit} className="form-signin">
-            <img src={logo2} className="Logo" alt="Logo DevWear" />
-            <h6 className="mb-7">
-              <p>
-                <strong>{"<DevWear/>"}</strong>
-              </p>
-            </h6>
-            <h6 className="mb-3 text-secondary">Registre sua conta aqui!</h6>
+      <div className="row2">
+        {successMessage && (
+          <div className="alert alert-success">{successMessage}</div>
+        )}
+        {error && <div className="alert alert-danger">{error}</div>}
 
-            <div className="mt-3">
+        <form onSubmit={handleSubmit} className="form-signin2">
+          <img src={logo2} className="Logo2" alt="Logo DevWear" />
+          <h6 className="mb-7">
+            <p>
+              <strong>{"<DevWear/>"}</strong>
+            </p>
+          </h6>
+          <h6 className="mb-3 text-secondary">Registre sua conta aqui!</h6>
+
+          <input
+            type="text"
+            name="name"
+            placeholder="Nome"
+            value={formData.name}
+            onChange={handleChange}
+            className={`form-control ${errors.name ? "is-invalid" : ""}`}
+          />
+          {errors.name && (
+            <div className="invalid-feedback d-block text-start">
+              {errors.name}
+            </div>
+          )}
+
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            className={`form-control ${errors.email ? "is-invalid" : ""}`}
+          />
+          {errors.email && (
+            <div className="invalid-feedback d-block text-start">
+              {errors.email}
+            </div>
+          )}
+
+          <input
+            type="password"
+            name="password"
+            placeholder="Senha"
+            value={formData.password}
+            onChange={handleChange}
+            className={`form-control ${errors.password ? "is-invalid" : ""}`}
+          />
+          {errors.password && (
+            <div className="invalid-feedback d-block text-start">
+              {errors.password}
+            </div>
+          )}
+
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirme sua senha"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            className={`form-control ${
+              errors.confirmPassword ? "is-invalid" : ""
+            }`}
+          />
+          {errors.confirmPassword && (
+            <div className="invalid-feedback d-block text-start">
+              {errors.confirmPassword}
+            </div>
+          )}
+
+          <InputMask
+            mask="999.999.999-99"
+            value={formData.cpf}
+            onChange={handleChange}
+          >
+            {(inputProps: React.InputHTMLAttributes<HTMLInputElement>) => (
               <input
+                {...inputProps}
                 type="text"
-                name="name"
-                placeholder="Nome"
-                value={formData.name}
-                onChange={handleChange}
-                className={`form-control ${errors.name ? "is-invalid" : ""}`}
+                name="cpf"
+                placeholder="CPF (xxx.xxx.xxx-xx)"
+                className={`form-control ${errors.cpf ? "is-invalid" : ""}`}
               />
-              {errors.name && (
-                <div className="invalid-feedback d-block text-start">
-                  {errors.name}
-                </div>
-              )}
+            )}
+          </InputMask>
+          {errors.cpf && (
+            <div className="invalid-feedback d-block text-start">
+              {errors.cpf}
             </div>
+          )}
 
-            <div className="mt-3">
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleChange}
-                className={`form-control ${errors.email ? "is-invalid" : ""}`}
-              />
-              {errors.email && (
-                <div className="invalid-feedback d-block text-start">
-                  {errors.email}
-                </div>
-              )}
-            </div>
+          <div className="mt-4">
+            <button type="submit" className="btn btn-primary w-100">
+              Registrar
+            </button>
+          </div>
 
-            <div className="mt-3">
-              <input
-                type="password"
-                name="password"
-                placeholder="Senha"
-                value={formData.password}
-                onChange={handleChange}
-                className={`form-control ${
-                  errors.password ? "is-invalid" : ""
-                }`}
-              />
-              {errors.password && (
-                <div className="invalid-feedback d-block text-start">
-                  {errors.password}
-                </div>
-              )}
-            </div>
-
-            <div className="mt-3">
-              <input
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirme sua senha"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                className={`form-control ${
-                  errors.confirmPassword ? "is-invalid" : ""
-                }`}
-              />
-              {errors.confirmPassword && (
-                <div className="invalid-feedback d-block text-start">
-                  {errors.confirmPassword}
-                </div>
-              )}
-            </div>
-
-            <div className="mt-3">
-              <InputMask
-                mask="999.999.999-99"
-                value={formData.cpf}
-                onChange={handleChange}
-              >
-                {(inputProps: React.InputHTMLAttributes<HTMLInputElement>) => (
-                  <input
-                    {...inputProps}
-                    type="text"
-                    name="cpf"
-                    placeholder="CPF (xxx.xxx.xxx-xx)"
-                    className={`form-control ${errors.cpf ? "is-invalid" : ""}`}
-                  />
-                )}
-              </InputMask>
-              {errors.cpf && (
-                <div className="invalid-feedback d-block text-start">
-                  {errors.cpf}
-                </div>
-              )}
-            </div>
-
-            <div className="mt-4">
-              <button type="submit" className="btn btn-primary w-100">
-                Registrar
-              </button>
-            </div>
-
-            <div className="links mt-3">
-              <span>Já tem uma conta? </span>
-              <Link to="/"> Logue aqui!</Link>
-            </div>
-          </form>
-        </div>
+          <div className="links mt-3">
+            <span>Já tem uma conta? </span>
+            <Link to="/"> Logue aqui!</Link>
+          </div>
+        </form>
       </div>
     </div>
   );
