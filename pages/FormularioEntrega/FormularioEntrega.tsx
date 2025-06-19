@@ -87,7 +87,7 @@ const FormularioEntrega = () => {
               />
               <input
                 type="text"
-                placeholder="Complemento (Opcional)"
+                placeholder="Complemento"
                 name="complemento"
                 value={formData.complemento}
                 onChange={handleChange}
