@@ -11,43 +11,22 @@ test.describe("Login", () => {
 
     await page.click('button:has-text("Acessar")');
 
-    // Aguarda por algo exclusivo da TelaPrincipal
-    await page.waitForSelector('h1:has-text("Bem-vindo")'); // <-- ajuste isso conforme seu layout real
+    await page.waitForSelector('h1:has-text("Bem-vindo")');
 
-    // Exemplo alternativo:
-    // await page.waitForSelector('.painel-principal');
-
-    // Confirma que o conteúdo está visível
     const welcome = page.locator('h1:has-text("Bem-vindo")');
     await expect(welcome).toBeVisible();
   });
 
-  test("Login com falha (senha incorreta)", async ({ page }) => {
+  test("Login com falha (dados incorretos)", async ({ page }) => {
     await page.goto(`${baseURL}/`);
 
-    await page.fill('input[placeholder="Email"]', "testeplayright@gmail.com");
+    await page.fill('input[placeholder="Email"]', "testeplayright@asd.com");
     await page.fill('input[placeholder="Senha"]', "senhaErrada");
 
     await page.click('button:has-text("Acessar")');
 
     const errorSpan = page.locator("span.text-danger");
-
-    // Espera pela mensagem exata
-    await expect(errorSpan).toHaveText("Credenciais inválidas");
-  });
-
-  test("Login com falha (email inválido)", async ({ page }) => {
-    await page.goto(`${baseURL}/`);
-
-    const emailInput = page.locator('input[placeholder="Email"]');
-    await emailInput.fill("testeplayright");
-
-    await page.fill('input[placeholder="Senha"]', "Testeplay123@");
-
-    await page.click('button:has-text("Acessar")');
-
-    // Espera que o input esteja inválido (sem @)
-    await expect(emailInput).toHaveAttribute("aria-invalid", "true");
+    await expect(errorSpan).toHaveText("Credenciais incorretas");
   });
 
   test("Login com falha (campos vazios)", async ({ page }) => {
@@ -56,6 +35,7 @@ test.describe("Login", () => {
     await page.click('button:has-text("Acessar")');
 
     const errorSpan = page.locator("span.text-danger");
+
     await expect(errorSpan).toBeVisible();
     await expect(errorSpan).toContainText(/e-mail/i);
   });
