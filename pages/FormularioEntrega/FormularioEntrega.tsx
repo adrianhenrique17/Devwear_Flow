@@ -6,11 +6,42 @@ import Navbar from "../../components/Navbar/NavBar";
 const FormularioEntrega = () => {
   const navigate = useNavigate();
   const [formaPagamento, setFormaPagamento] = useState("");
+  const [erro, setErro] = useState("");
 
-  interface HandleSubmitEvent extends React.FormEvent<HTMLFormElement> {}
+  const [formData, setFormData] = useState({
+    cep: "",
+    rua: "",
+    numero: "",
+    complemento: "",
+    bairro: "",
+    cidade: "",
+    uf: "",
+  });
 
-  const handleSubmit = (e: HandleSubmitEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const { cep, rua, numero, bairro, cidade, uf } = formData;
+
+    if (
+      !cep ||
+      !rua ||
+      !numero ||
+      !bairro ||
+      !cidade ||
+      !uf ||
+      !formaPagamento
+    ) {
+      setErro("Dados não preenchidos");
+      return;
+    }
+
+    setErro(""); // limpa o erro se estiver tudo certo
     navigate("/ObrigadoPelaCompra");
   };
 
@@ -18,6 +49,8 @@ const FormularioEntrega = () => {
     <div className="form-container">
       <Navbar />
       <h2 className="form-title">Complete seu pedido</h2>
+
+      {erro && <div className="alert alert-danger">{erro}</div>}
 
       <form onSubmit={handleSubmit}>
         <section className="form-section">
@@ -30,16 +63,59 @@ const FormularioEntrega = () => {
           </div>
 
           <div className="inputs-container">
-            <input type="text" placeholder="CEP" />
-            <input type="text" placeholder="Rua" />
+            <input
+              type="text"
+              placeholder="CEP"
+              name="cep"
+              value={formData.cep}
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              placeholder="Rua"
+              name="rua"
+              value={formData.rua}
+              onChange={handleChange}
+            />
             <div className="input-row">
-              <input type="text" placeholder="Número" />
-              <input type="text" placeholder="Complemento (Opcional)" />
+              <input
+                type="text"
+                placeholder="Número"
+                name="numero"
+                value={formData.numero}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                placeholder="Complemento (Opcional)"
+                name="complemento"
+                value={formData.complemento}
+                onChange={handleChange}
+              />
             </div>
             <div className="input-row">
-              <input type="text" placeholder="Bairro" />
-              <input type="text" placeholder="Cidade" />
-              <input type="text" placeholder="UF" className="uf" />
+              <input
+                type="text"
+                placeholder="Bairro"
+                name="bairro"
+                value={formData.bairro}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                placeholder="Cidade"
+                name="cidade"
+                value={formData.cidade}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                placeholder="UF"
+                name="uf"
+                className="uf"
+                value={formData.uf}
+                onChange={handleChange}
+              />
             </div>
           </div>
         </section>
