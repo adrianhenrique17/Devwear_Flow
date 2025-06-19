@@ -21,6 +21,7 @@ const EditarPerfil = () => {
   const [cpf, setCpf] = useState("");
 
   const [errors, setErrors] = useState<ErrorFields>({});
+  const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
     if (userId) {
@@ -39,6 +40,7 @@ const EditarPerfil = () => {
 
   const handleUpdate = async () => {
     const newErrors: ErrorFields = {};
+    setSuccessMessage(""); // Limpar mensagem anterior
 
     if (!cpf) newErrors.cpf = "CPF é obrigatório.";
     if (!nome) newErrors.nome = "Nome é obrigatório.";
@@ -63,7 +65,7 @@ const EditarPerfil = () => {
         cpf: cpf,
       });
 
-      alert("Perfil atualizado com sucesso!");
+      setSuccessMessage("Alterado com sucesso!");
       setErrors({});
     } catch (error: any) {
       console.error("Erro ao atualizar perfil:", error);
@@ -74,9 +76,12 @@ const EditarPerfil = () => {
         responseMessage?.toLowerCase().includes("cpf") ||
         responseMessage?.toLowerCase().includes("não encontrado")
       ) {
-      } else {
         setErrors({
           cpf: "CPF não corresponde ao seu usuário.",
+        });
+      } else {
+        setErrors({
+          api: "Erro inesperado ao atualizar perfil.",
         });
       }
     }
@@ -86,6 +91,9 @@ const EditarPerfil = () => {
     <div>
       <Navbar />
       <h1 className="editar-perfil-text">Editar Perfil</h1>
+
+      {successMessage && <p className="success-msg">{successMessage}</p>}
+
       <div className="container-editar">
         <div className="form-group">
           <label htmlFor="cpf">

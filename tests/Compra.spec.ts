@@ -35,8 +35,7 @@ test.describe("Fluxo de compra completo", () => {
     await page.click('button:has-text("CARTÃO DE CRÉDITO")');
 
     await Promise.all([
-      page.waitForURL(`${baseURL}/ObrigadoPelaCompra`, { timeout: 5000 }), // Timeout opcional de segurança
-      page.click('button:has-text("FINALIZAR")'),
+      page.waitForURL(`${baseURL}/ObrigadoPelaCompra`, { timeout: 5000 }),
     ]);
 
     await expect(page.locator("img.img-obg")).toBeVisible();
