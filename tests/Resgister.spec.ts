@@ -7,7 +7,7 @@ test.describe("Registro", () => {
     await page.goto(`${baseURL}/register`);
 
     await page.fill('input[placeholder="Nome"]', "PlayrighTeste");
-    await page.fill('input[placeholder="Email"]', "PlayrighTeste2@gmail.com");
+    await page.fill('input[placeholder="Email"]', "Testeregister@gmail.com");
     await page.fill('input[placeholder="Senha"]', "Testeplay123@");
     await page.fill('input[placeholder="Confirme sua senha"]', "Testeplay123@");
     await page.fill(

@@ -34,6 +34,8 @@ test.describe("Fluxo de compra completo", () => {
 
     await page.click('button:has-text("CARTÃO DE CRÉDITO")');
 
+    await page.click('button:has-text("FINALIZAR")');
+
     await Promise.all([
       page.waitForURL(`${baseURL}/ObrigadoPelaCompra`, { timeout: 5000 }),
     ]);
