@@ -1,0 +1,85 @@
+{
+  "hash": "54b108ef",
+  "configHash": "7f8f4e3b",
+  "lockfileHash": "57acdac7",
+  "browserHash": "72ff9893",
+  "optimized": {
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "92a7cc03",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "285e7982",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "e2642bea",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.mjs",
+      "file": "react-router-dom.js",
+      "fileHash": "3d91c522",
+      "needsInterop": false
+    },
+    "axios": {
+      "src": "../../node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "25acefb2",
+      "needsInterop": false
+    },
+    "react-router": {
+      "src": "../../node_modules/react-router/dist/development/index.mjs",
+      "file": "react-router.js",
+      "fileHash": "c216d4db",
+      "needsInterop": false
+    },
+    "react-input-mask": {
+      "src": "../../node_modules/react-input-mask/index.js",
+      "file": "react-input-mask.js",
+      "fileHash": "ad78ecde",
+      "needsInterop": true
+    },
+    "@emailjs/browser": {
+      "src": "../../node_modules/@emailjs/browser/es/index.js",
+      "file": "@emailjs_browser.js",
+      "fileHash": "c08dd2d3",
+      "needsInterop": false
+    },
+    "keen-slider/react": {
+      "src": "../../node_modules/keen-slider/react.js",
+      "file": "keen-slider_react.js",
+      "fileHash": "1a9b41c7",
+      "needsInterop": true
+    },
+    "react-bootstrap/Dropdown": {
+      "src": "../../node_modules/react-bootstrap/esm/Dropdown.js",
+      "file": "react-bootstrap_Dropdown.js",
+      "fileHash": "6344fe14",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-GFORRHYP": {
+      "file": "chunk-GFORRHYP.js"
+    },
+    "chunk-EKY2PLM5": {
+      "file": "chunk-EKY2PLM5.js"
+    },
+    "chunk-V2X5ZORR": {
+      "file": "chunk-V2X5ZORR.js"
+    },
+    "chunk-32E4H3EV": {
+      "file": "chunk-32E4H3EV.js"
+    },
+    "chunk-G3PMV62Z": {
+      "file": "chunk-G3PMV62Z.js"
+    }
+  }
+}
