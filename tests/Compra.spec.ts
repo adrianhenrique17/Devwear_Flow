@@ -5,7 +5,7 @@ test.describe("Fluxo de compra completo", () => {
 
   test("Sucesso de compra", async ({ page }) => {
     await page.goto(`${baseURL}/`);
-    await page.fill('input[placeholder="Email"]', "testeplayy@play.com");
+    await page.fill('input[placeholder="Email"]', "testeplayright@gmail.com");
     await page.fill('input[placeholder="Senha"]', "Testeplay123@");
     await page.click('button:has-text("Acessar")');
 
