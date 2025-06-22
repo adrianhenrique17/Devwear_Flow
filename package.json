@@ -10,8 +10,7 @@
     "preview": "vite preview",
     "test": "playwright test",
     "prepare": "husky",
-    "test:e2e": "playwright test --project=chromium",
-    "commitlint": "commitlint --edit"
+    "test end-2-end": "playwright test"
   },
   "dependencies": {
     "@chakra-ui/react": "^3.15.0",
@@ -46,8 +45,6 @@
     "three": "^0.158.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
     "@eslint/js": "^9.29.0",
     "@playwright/test": "^1.53.1",
     "@types/react": "^18.3.20",
