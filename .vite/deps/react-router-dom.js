@@ -1,4 +1,7 @@
 import {
+  require_react_dom
+} from "./chunk-V2X5ZORR.js";
+import {
   Action,
   Await,
   BrowserRouter,
@@ -119,9 +122,6 @@ import {
   withErrorBoundaryProps,
   withHydrateFallbackProps
 } from "./chunk-GFORRHYP.js";
-import {
-  require_react_dom
-} from "./chunk-V2X5ZORR.js";
 import {
   require_react
 } from "./chunk-32E4H3EV.js";
